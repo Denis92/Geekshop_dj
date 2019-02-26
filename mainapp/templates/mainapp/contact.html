@@ -1,0 +1,37 @@
+{% extends 'mainapp/base.html' %}
+{% load staticfiles %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contact_style.css' %}">
+{% endblock %}
+{% block text_in_head %}
+    <div class="text_in_head">
+        <h1>Contact Us</h1>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="main">
+        <div class="information">
+            {% for i in list_info %}
+                <div class="main_info">
+                    <ul>
+                        <li><img src="{% static 'img/location.png' %}"></li>
+                        <li><h1>CALIFORNIA</h1></li>
+                        <li>
+                            <h3>Phone:</h3>
+                            <p>1900-1234-5678</p>
+                        </li>
+                        <li>
+                            <h3>Email:</h3>
+                            <p>info@interior.com</p>
+                        </li>
+                        <li>
+                            <h3>Addres:</h3>
+                            <p class="addres">12 W 1St. 90001 Los Angeles, Califonia</p>
+                        </li>
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

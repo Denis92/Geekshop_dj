@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>
+        {% block title %}
+            {{ title|title }}
+        {% endblock %}
+    </title>
+    {% block css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style_main.css' %}">
+    {% endblock %}
+
+</head>
+<body>
+	<div class="container">
+        <div class="header">
+            {% block logo %}
+                <div class="logo">
+				    <a href="/">
+					    <img src="{% static 'img/logo.png' %}">
+				    </a>
+			    </div>
+            {% endblock %}
+
+            {% block menu %}
+			    <div class="menu">
+				    <ul>
+                    {% for link_url in link %}
+                            <li>
+                                <a href="{% url link_url.href%}"
+                                    class="{% if request.resolver_match.url_name == link_url.href %}
+                                    active
+                                    {% endif %}">
+                                    {{ link_url.name }}
+                                </a>
+                            </li>
+                    {% endfor %}
+					    <li><a href="#">HISTORY</a></li>
+					    <li><a href="#">SHOWROOM</a></li>
+					    <li><a href="#"><img src="{% static 'img/search.png' %}"></a></li>
+                    </ul>
+			    </div>
+            {% endblock %}
+
+            {% block text_in_head %}
+
+            {% endblock %}
+
+            {% block nav_pic %}
+
+            {% endblock %}
+        </div>
+
+        {% block content %}
+
+        {% endblock %}
+
+	</div>
+
+    {% block footer %}
+        <div class="footer">
+			<div class="contact_f">
+				<ul>
+					<li><h3>CONTACT US</h3></li>
+					<li><p>132A Bridge Road Richmond VIC<br>Australia.</p>
+					</li>
+					<li><p>Talk to us on 1300 132<br>info@interior.com</p>
+					</li>
+				</ul>
+			</div>
+			<div class="info_f">
+				<ul>
+					<li><h3>USEFUL INFORMATION</h3></li>
+					<li>SALE TERMS</li>
+					<li>CUSTOMER CARE</li>
+					<li>DELIVERY</li>
+				</ul>
+			</div>
+			<div class="career_f">
+				<ul>
+					<li>ARCHITECT ACCOUNTS</li>
+					<li>CAREERS</li>
+					<li>EXCHANGES & RETURNS</li>
+				</ul>
+			</div>
+			<div class="email_f">
+				<ul>
+					<li><h3>LET'S STAY IN TOUCH!</h3></li>
+					<li><p>Suscride to know about our latest news, product and
+						<br> special offers just for suscribers.</p></li>
+					<li><input type="Email" name="email_user" placeholder="your email addres">
+					</li>
+				</ul>
+			</div>
+			<div class="copy_f">
+				<ul>
+					<li><p>&copy; COPYRIGHT - INTERIOR 2016. ALL RIGHTS RESERVED.</p></li>
+					<li><img src="{% static 'img/social-links.png' %}"></li>
+					<li><p>TERMS & CONTDITIONS / PRIVACY POLICY & COOKIES</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+    {% endblock %}
+
+</body>
+</html>
