@@ -1,0 +1,60 @@
+{% extends 'mainapp/base.html' %}
+{% load staticfiles %}
+{% block css %}
+    {{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/product_style.css' %}">
+{% endblock %}
+
+{% block text_in_head %}
+    <div class="text_in_head">
+        <h1>Our Products Range</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="main">
+        <div class="link_main_1">
+            <ul>
+                <li><a href="#">ALL</a></li>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">OFFICE</a></li>
+            </ul>
+        </div>
+        <div class="link_main_2">
+            <ul>
+                <li><a href="#">FURNITURE</a></li>
+                <li><a href="#">MODERN</a></li>
+                <li><a href="#">CLASSIC</a></li>
+            </ul>
+        </div>
+        <div class="product_pic">
+            <ul>
+                {% for product_img in list_img %}
+                    <li><a href="#"><img src="/static/{{ product_img }}"></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="load">
+            <img src="/static/img/load.png">
+        </div>
+        <div class="promo_product">
+            <div class="promo_pic_1">
+                <h3>EXCLUSIVE</h3>
+                <h1>Fishnet Chair</h1>
+                <p>Seat and back with upholstery made of cold cure foam.
+                    <br> Steel frame, avalible in matt power-coated black
+                </p>
+                <a href="#">ORDER US</a>
+            </div>
+            <div class="promo_pic_2">
+                <h3>EXCLUSIVE</h3>
+                <h1>Fishnet Chair</h1>
+                <p>Seat and back with upholstery made of cold cure foam.
+                    <br> Steel frame, avalible in matt power-coated black
+                </p>
+                <a href="#">ORDER US</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
