@@ -12,7 +12,7 @@ list_product_img = [
     'img/product-31.jpg',
     'img/product-41.jpg',
     'img/product-5.jpg',
-    'img/product-6.jpg',
+
 ]
 links_menu = [
     {'href': 'main', 'name': 'HOME'},
