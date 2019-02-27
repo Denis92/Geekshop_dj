@@ -3,107 +3,66 @@
 <html>
 <head>
 	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>
         {% block title %}
-            {{ title|title }}
+            {{ request.resolver_match.url_name|title }}
         {% endblock %}
     </title>
-    {% block css %}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style_main.css' %}">
-    {% endblock %}
+       <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/pi_logo.png' %}" type="image/png">
 
 </head>
 <body>
-	<div class="container">
-        <div class="header">
-            {% block logo %}
-                <div class="logo">
-				    <a href="/">
-					    <img src="{% static 'img/logo.png' %}">
-				    </a>
-			    </div>
-            {% endblock %}
 
-            {% block menu %}
-			    <div class="menu">
-				    <ul>
-                    {% for link_url in link %}
-                            <li>
+        <nav class="navbar navbar-expand-md navbar-dark bg-info sticky-top padd">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="{% static 'img/pi_logo.png' %}"  width="50" height="55" class="d-inline-block align-center" alt="">Raspberry Pi
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse navbar-text" id="navbar_menu">
+                    <ul class="navbar-nav ml-auto my_nav">
+                        {% for link_url in link %}
+                            <li class="nav-item">
                                 <a href="{% url link_url.href%}"
-                                    class="{% if request.resolver_match.url_name == link_url.href %}
+                                    class="nav-link {% if request.resolver_match.url_name == link_url.href %}
                                     active
                                     {% endif %}">
                                     {{ link_url.name }}
                                 </a>
                             </li>
-                    {% endfor %}
-					    <li><a href="#">HISTORY</a></li>
-					    <li><a href="#">SHOWROOM</a></li>
-					    <li><a href="#"><img src="{% static 'img/search.png' %}"></a></li>
+                        {% endfor %}
                     </ul>
-			    </div>
-            {% endblock %}
+                </div>
+            </div>
+        </nav>
 
-            {% block text_in_head %}
+    {% block content %}
 
-            {% endblock %}
-
-            {% block nav_pic %}
-
-            {% endblock %}
-        </div>
-
-        {% block content %}
-
-        {% endblock %}
-
-	</div>
-
-    {% block footer %}
-        <div class="footer">
-			<div class="contact_f">
-				<ul>
-					<li><h3>CONTACT US</h3></li>
-					<li><p>132A Bridge Road Richmond VIC<br>Australia.</p>
-					</li>
-					<li><p>Talk to us on 1300 132<br>info@interior.com</p>
-					</li>
-				</ul>
-			</div>
-			<div class="info_f">
-				<ul>
-					<li><h3>USEFUL INFORMATION</h3></li>
-					<li>SALE TERMS</li>
-					<li>CUSTOMER CARE</li>
-					<li>DELIVERY</li>
-				</ul>
-			</div>
-			<div class="career_f">
-				<ul>
-					<li>ARCHITECT ACCOUNTS</li>
-					<li>CAREERS</li>
-					<li>EXCHANGES & RETURNS</li>
-				</ul>
-			</div>
-			<div class="email_f">
-				<ul>
-					<li><h3>LET'S STAY IN TOUCH!</h3></li>
-					<li><p>Suscride to know about our latest news, product and
-						<br> special offers just for suscribers.</p></li>
-					<li><input type="Email" name="email_user" placeholder="your email addres">
-					</li>
-				</ul>
-			</div>
-			<div class="copy_f">
-				<ul>
-					<li><p>&copy; COPYRIGHT - INTERIOR 2016. ALL RIGHTS RESERVED.</p></li>
-					<li><img src="{% static 'img/social-links.png' %}"></li>
-					<li><p>TERMS & CONTDITIONS / PRIVACY POLICY & COOKIES</p>
-					</li>
-				</ul>
-			</div>
-		</div>
     {% endblock %}
+    <footer>
+        <div class="container-fluid bg-secondary">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <br><h4 class="text-center">Обратная связь</h4><br>
+                    <a target="_blank" name="contact" href="https://github.com/Denis92"><i class="fab fa-github"></i></a>
+                    <a target="_blank" href="https://t.me/Denis_Gorshkov"><i class="fab fa-telegram"></i></a>
+                    <a target="_blank" href="https://plus.google.com/u/0/113256146961720232828?tab=mX"><i class="fab fa-google-plus"></i></a>
+                    <a target="_blank" href="https://vk.com/denis_0x00ff00"><i class="fab fa-vk"></i></a>
+                </div>
+            </div>
+            <p class="text-right">2019&copy; Все права защищены.</p>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
 </body>
 </html>

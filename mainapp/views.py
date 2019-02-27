@@ -1,26 +1,14 @@
 from django.shortcuts import render
 
 list_product_img = [
-    'img/product-11.jpg',
-    'img/product-21.jpg',
-    'img/product-31.jpg',
-    'img/product-41.jpg',
-    'img/product-5.jpg',
-    'img/product-6.jpg',
-    'img/product-11.jpg',
-    'img/product-21.jpg',
-    'img/product-31.jpg',
-    'img/product-41.jpg',
-    'img/product-5.jpg',
-
+    {'href': 'img/Raspberry-Pi-3_small.jpg', 'name': 'Raspberry Pi 3 Model B'},
+    {'href': 'img/Raspberry-Pi-3_plus_small.jpg', 'name': 'Raspberry Pi 3 Model B+'},
+    {'href': 'img/Pi-Zero-W-Tilt_small.jpg', 'name': 'Raspberry Pi Zero'},
 ]
 links_menu = [
-    {'href': 'main', 'name': 'HOME'},
-    #{'href': '#', 'name': 'HISTORY'},
-    #{'href': '##', 'name': 'SHOWROOM'},
-    {'href': 'product', 'name': 'PRODUCTS'},
-    {'href': 'contact', 'name': 'CONTACT'},
-   # {'href': '', 'name': "{% static 'img/search.png' %}"},
+    {'href': 'main', 'name': 'Главная'},
+    {'href': 'product', 'name': 'Каталог'},
+    {'href': 'contact', 'name': 'Контакты'},
 ]
 
 # Create your views here.
