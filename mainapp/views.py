@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import ProductCategory, Product
 
 list_product_img = [
     {'href': 'img/Raspberry-Pi-3_small.jpg', 'name': 'Raspberry Pi 3 Model B'},
@@ -18,7 +19,8 @@ def main(request):
 
 
 def product(request):
-    return render(request, 'mainapp/product.html', context={'list_img': list_product_img, 'link': links_menu})
+    products = Product.objects.all()
+    return render(request, 'mainapp/product.html', context={'products': products, 'list_img': list_product_img, 'link': links_menu})
 
 
 def contact(request):
