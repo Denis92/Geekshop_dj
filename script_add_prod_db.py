@@ -17,14 +17,14 @@ with open('example_prod.json', 'r') as f:
 list_category = [str(i) for i in list(ProductCategory.objects.all())]
 data['image'] = check_blank_str(data['image'], '../static/img/no_photo.png')
 data['category'] = check_blank_str(data['category'], 'no category')
-print(data)
+
 if data['category'] in list_category:
     data['category'] = ProductCategory.objects.all()[list_category.index(data['category'])]
 else:
     new_category = ProductCategory(name=data['category'])
     new_category.save()
     data['category'] = new_category
-category = ProductCategory.objects.all()[1]
+
 new_prod = Product(
     category=data['category'],
     name=data['name'],
@@ -34,6 +34,4 @@ new_prod = Product(
     price=data['price'],
     quantity=data['quantity'],
 )
-print(list_category)
-print(new_prod)
 new_prod.save()
