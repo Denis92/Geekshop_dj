@@ -20,10 +20,11 @@ from django.contrib import admin
 import mainapp.views as mainapp
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import include
 
 urlpatterns = [
     path('', mainapp.main, name='main'),
-    path('product/', mainapp.product, name='product'),
+    path('product/', include(('mainapp.urls', 'mainapp'), namespace='product')),
     path('contact/', mainapp.contact, name='contact'),
     path('admin/', admin.site.urls),
 ]

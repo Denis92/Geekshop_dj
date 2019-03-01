@@ -8,7 +8,7 @@ list_product_img = [
 ]
 links_menu = [
     {'href': 'main', 'name': 'Главная'},
-    {'href': 'product', 'name': 'Каталог'},
+    {'href': 'product:index', 'name': 'Каталог'},
     {'href': 'contact', 'name': 'Контакты'},
 ]
 
@@ -18,7 +18,8 @@ def main(request):
     return render(request, 'mainapp/index.html', context={'link': links_menu})
 
 
-def product(request):
+def product(request, pk=None):
+    print(pk)
     products = Product.objects.all()
     return render(request, 'mainapp/product.html', context={'products': products, 'list_img': list_product_img, 'link': links_menu})
 
