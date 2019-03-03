@@ -3,14 +3,19 @@
 
 
 {% block content_auth %}
-    <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ edit_form.as_p }}
-        <button class="btn btn-success form-control" type="submit">Сохранить</button>
-    </form>
-    <button class="btn btn-round form-control last">
-        <a href="{% url 'main' %}" class="">
-            на главную
-        </a>
-    </button>
+    <div class="card text-center">
+        <h5 class="card-header">Редактирование профиля</h5>
+        <div class="card-body">
+            <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ edit_form.as_p }}
+                <button class="btn btn-success form-control" type="submit">Сохранить</button>
+            </form>
+            <button class="btn btn-round form-control last">
+                <a href="{% url 'main' %}" class="">
+                    на главную
+                </a>
+            </button>
+        </div>
+    </div>
 {% endblock %}

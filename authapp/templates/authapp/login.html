@@ -3,22 +3,27 @@
 
 
 {% block content_auth %}
-    <form  action="{% url 'auth:login' %}" method="post">
-        {% csrf_token %}
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon2">Логин</span>
-            </div>
-            {{ login_form.username }}
-        </div>
+    <div class="card text-center">
+        <h5 class="card-header">Вход</h5>
+        <div class="card-body">
+            <form action="{% url 'auth:login' %}" method="post">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon2">Логин</span>
+                    </div>
+                    {{ login_form.username }}
+                </div>
 
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon2">Пароль</span>
-            </div>
-                {{ login_form.password }}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon2">Пароль</span>
+                    </div>
+                    {{ login_form.password }}
+                </div>
+                <br>
+                <button type="submit" value="войти" class="btn btn-success form-control">Войти</button>
+            </form>
         </div>
-            <br>
-            <button type="submit" value="войти" class="btn btn-success form-control">Войти</button>
-    </form>
+    </div>
 {% endblock %}

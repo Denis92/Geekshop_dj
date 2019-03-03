@@ -2,10 +2,18 @@
 {% load staticfiles %}
 
 {% block content_auth %}
-    <form class="form-horizontal" action="{% url 'auth:register' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ register_form.as_p }}
-        <br>
-        <button class="btn btn btn-success form-control" type="submit" value="зарегистрироваться">Зарегистрироваться</button>
-    </form>
+    <div class="card text-center">
+        <h5 class="card-header">Регистрация</h5>
+        <div class="card-body">
+            <form class="form-horizontal" action="{% url 'auth:register' %}" method="post"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ register_form.as_p }}
+                <br>
+                <button class="btn btn btn-success form-control" type="submit" value="зарегистрироваться">
+                    Зарегистрироваться
+                </button>
+            </form>
+        </div>
+    </div>
 {% endblock %}
