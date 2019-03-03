@@ -1,9 +1,7 @@
 {
-   "category": "",
+   "category": "Raspberry Pi plus",
    "name": "Raspberry Zero plus",
    "image": "",
-   "short_desc": "no short desc",
-   "description": "no description",
-   "price": 0,
-   "quantity": 0
+   "price": 2000,
+   "quantity":10
 }

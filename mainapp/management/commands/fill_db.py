@@ -7,15 +7,15 @@ import json
 
 
 def json_read(path_json, json_file):
-    with open(os.path.join(path_json, json_file), 'r') as f:
-        return json.loads(f)
+    with open(os.path.join(path_json, json_file + '.json'), 'r') as f:
+        return json.load(f)
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
         path_json = 'mainapp/json'
-        json_file_categories = 'categories.json'
-        json_file_products = 'product.json'
+        json_file_categories = 'categories'
+        json_file_products = 'product'
         categories = json_read(path_json, json_file_categories)
 
         ProductCategory.objects.all().delete()

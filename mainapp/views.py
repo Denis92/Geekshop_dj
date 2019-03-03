@@ -25,3 +25,4 @@ def product(request):
 
 def contact(request):
     return render(request, 'mainapp/contact.html', context={'list_info': [1, 2, 3], 'link': links_menu})
+
