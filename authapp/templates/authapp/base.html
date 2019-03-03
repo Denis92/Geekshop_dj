@@ -1,20 +1,20 @@
-
 {% extends 'mainapp/base.html' %}
 {% load staticfiles %}
 {% block content %}
-    <div class="container">
-    <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
-    <div class="card text-center" style="width: 60rem;">
-        <h5 class="card-header">Выполните вход</h5>
-        <div class="card-body">
-            <br>
-            {% block content_auth %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6  col-lg-4 col-xl-4 offset-md-3 offset-lg-4">
+                <br>
+                <div class="card text-center">
+                    <h5 class="card-header">Выполните вход</h5>
+                    <div class="card-body">
+                        {% block content_auth %}
 
-            {% endblock %}
+                        {% endblock %}
+                    </div>
+                </div>
+                <br>
+            </div>
         </div>
-    </div>
-    </div>
-    </div>
     </div>
 {% endblock %}
