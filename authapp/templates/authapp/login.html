@@ -5,6 +5,15 @@
 {% block content_auth %}
     <div class="card text-center">
         <h5 class="card-header">Вход</h5>
+        {% if request.method == 'POST' %}
+            {% if login_form.is_valid %}
+            {% else %}
+                <br>
+                <div class="alert alert-danger" role="alert">
+                    Логин или пароль введены не верно
+                </div>
+            {% endif %}
+        {% endif %}
         <div class="card-body">
             <form action="{% url 'auth:login' %}" method="post">
                 {% csrf_token %}
@@ -22,6 +31,7 @@
                     {{ login_form.password }}
                 </div>
                 <br>
+
                 <button type="submit" value="войти" class="btn btn-success form-control">Войти</button>
             </form>
         </div>
