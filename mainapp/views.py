@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import ProductCategory, Product
+from django.shortcuts import get_object_or_404
 
 list_product_img = [
     {'href': 'img/Raspberry-Pi-3_small.jpg', 'name': 'Raspberry Pi 3 Model B'},
@@ -20,8 +21,39 @@ def main(request):
 
 def product(request, pk=None):
     print(pk)
-    products = Product.objects.all()
-    return render(request, 'mainapp/product.html', context={'products': products, 'list_img': list_product_img, 'link': links_menu})
+
+    title = 'продукты'
+    links_menu_prod = ProductCategory.objects.all()
+    list_products = Product.objects.all()
+
+    if pk is not None:
+        if pk == 0:
+            products = Product.objects.all().order_by('price')
+            category = {'name': 'все'}
+        else:
+            category = get_object_or_404(ProductCategory, pk=pk)
+            products = Product.objects.filter(category__pk=pk).order_by('price')
+
+        context = {
+            'title': title,
+            'links_menu_prod': links_menu_prod,
+            'category': category,
+            'products': products,
+            'list_products': list_products,
+            'link': links_menu,
+        }
+        return render(request, 'mainapp/products_list.html', context=context)
+
+    same_products = Product.objects.all()[1:3]
+
+    context = {
+        'title': title,
+        'links_menu_prod': links_menu_prod,
+        'same_products': same_products,
+        'list_products': list_products,
+        'link': links_menu,
+    }
+    return render(request, 'mainapp/product.html', context=context)
 
 
 def contact(request):
