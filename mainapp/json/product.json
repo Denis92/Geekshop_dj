@@ -1,0 +1,26 @@
+[
+  {
+    "category": "Raspberry Pi plus",
+    "name": "Raspberry Zero plus",
+    "price": 1000,
+    "quantity": 10
+  },
+  {
+    "category": "Raspberry Pi",
+    "name": "Raspberry 3",
+    "price": 2000,
+    "quantity": 10
+  },
+  {
+    "category": "Raspberry Pi plus",
+    "name": "Raspberry 3 plus",
+    "price": 2500,
+    "quantity": 10
+  },
+  {
+    "category": "Raspberry Pi",
+    "name": "Raspberry 2",
+    "price": 1500,
+    "quantity": 10
+  }
+]
