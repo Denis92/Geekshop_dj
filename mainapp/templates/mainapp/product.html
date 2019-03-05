@@ -2,26 +2,5 @@
 {% load staticfiles %}
 {% block content %}
     {% include 'mainapp/includes/inc_categories_menu.html' %}
-    <div class="container">
-        <div class="row">
-            <div class="card-deck">
-                {% for prod in list_products %}
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-                        <br>
-                        <div class="card border-success mb-3 text-center" style="width: 14rem;">
-                            <div class="text-center">
-                                <img src="/media/{{ prod.image }}" class="card-img-top rounded"
-                                     style="width: 150px; height: 150px;" alt="...">
-                                <div class="card-body">
-                                    {#                    <p class="card-text">{{ prod.description }}</p>#}
-                                    <a href="#" class="btn btn-outline-success btn-lg" role="button"
-                                       aria-pressed="true">{{ prod.name }}</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+    {% include 'mainapp/includes/inc_products_menu.html' %}
 {% endblock %}

@@ -1,37 +1,12 @@
 {% extends 'mainapp/base.html' %}
 {% load staticfiles %}
+{#{% load my_mull %}#}
 
 
 {% block content %}
     {% include 'mainapp/includes/inc_categories_menu.html' %}
-    <div class="products_list">
-        <div class="title clearfix">
-            <h2>
-                Категория: "{{ category.name|title }}"
-            </h2>
-        </div>
-        <div class="container">
-            <div class="card-deck">
-                {% for prod in products %}
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-                        <br>
-                        <div class="card border-success mb-3 text-center" style="width: 14rem;">
-                            <a href="{% url 'basket:add' prod.pk %}">
-                            <div class="text-center">
-                                <img src="/media/{{ prod.image }}" class="card-img-top rounded"
-                                     style="width: 150px; height: 150px;" alt="...">
-                                <div class="card-body">
-                                    {#                    <p class="card-text">{{ prod.description }}</p>#}
-                                    <a href="#" class="btn btn-outline-success btn-lg" role="button"
-                                       aria-pressed="true">{{ prod.name }}</a>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    </div>
+    <h2>
+        Категория: "{{ category.name|title }}"
+    </h2>
+    {% include 'mainapp/includes/inc_products_menu.html' %}
 {% endblock %}

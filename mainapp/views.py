@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import ProductCategory, Product
 from django.shortcuts import get_object_or_404
+from basketapp.models import Basket
+from basketapp.views import basket_viw
 
 list_product_img = [
     {'href': 'img/Raspberry-Pi-3_small.jpg', 'name': 'Raspberry Pi 3 Model B'},
@@ -16,7 +18,12 @@ links_menu = [
 # Create your views here.
 
 def main(request):
-    return render(request, 'mainapp/index.html', context={'link': links_menu})
+    context = {
+        'link': links_menu,
+        'price_all': basket_viw(request)[0],
+        'quantity_all': basket_viw(request)[1],
+    }
+    return render(request, 'mainapp/index.html', context= context)
 
 
 def product(request, pk=None):
@@ -24,7 +31,10 @@ def product(request, pk=None):
 
     title = 'продукты'
     links_menu_prod = ProductCategory.objects.all()
-    list_products = Product.objects.all()
+    products = Product.objects.all()
+    basket = []
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
 
     if pk is not None:
         if pk == 0:
@@ -33,14 +43,15 @@ def product(request, pk=None):
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
             products = Product.objects.filter(category__pk=pk).order_by('price')
-
         context = {
             'title': title,
             'links_menu_prod': links_menu_prod,
             'category': category,
             'products': products,
-            'list_products': list_products,
             'link': links_menu,
+            'basket': basket,
+            'price_all': basket_viw(request)[0],
+            'quantity_all': basket_viw(request)[1],
         }
         return render(request, 'mainapp/products_list.html', context=context)
 
@@ -50,12 +61,21 @@ def product(request, pk=None):
         'title': title,
         'links_menu_prod': links_menu_prod,
         'same_products': same_products,
-        'list_products': list_products,
         'link': links_menu,
+        'products': products,
+        'basket': basket,
+        'price_all': basket_viw(request)[0],
+        'quantity_all': basket_viw(request)[1],
     }
     return render(request, 'mainapp/product.html', context=context)
 
 
 def contact(request):
-    return render(request, 'mainapp/contact.html', context={'list_info': [1, 2, 3], 'link': links_menu})
+    context = {
+        'list_info': [1, 2, 3],
+        'link': links_menu,
+        'price_all': basket_viw(request)[0],
+        'qauntity_all': basket_viw(request)[1],
+    }
+    return render(request, 'mainapp/contact.html', context= context)
 
