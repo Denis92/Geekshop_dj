@@ -1,6 +1,12 @@
 {% extends 'mainapp/base.html' %}
 {% load staticfiles %}
+{#{% load my_mull %}#}
+
+
 {% block content %}
     {% include 'mainapp/includes/inc_categories_menu.html' %}
+    <h2>
+        Категория: "{{ category.name|title }}"
+    </h2>
     {% include 'mainapp/includes/inc_products_menu.html' %}
 {% endblock %}

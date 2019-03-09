@@ -4,11 +4,11 @@
 {% block content %}
 	<div class="container">
         {% if user.is_authenticated %}
+            <br>
             <h2 align="center">Добро пожаловать, {{ user.username }}!</h2>
         {% else %}
             <h2 align="center">Добро пожаловать!</h2>
         {% endif %}
-
 		<p align="center"><p class="text-justify">Уважаемый посетитель, рад приветствовать Вас в нашем интернет магазине. У нас Вы сможете приобрести любую интересующию Вас версию платы Raspberry Pi, а так же найти большое количество информации по ней, от описания платы, до стартовых проектов</p>
 	</div>
 {% endblock %}

@@ -1,0 +1,25 @@
+
+<ul class="nav nav-tabs justify-content-end">
+
+    <li class="nav-item">
+        <a class="nav-link disabled" href="#">Категории:</a>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'product:category' 0 %}"
+           class="nav-link {% if request.resolver_match.kwargs.pk == 0 %}
+                active
+              {% endif %}">
+            Все
+        </a>
+    </li>
+    {% for link in links_menu_prod %}
+        <li class="nav-item">
+            <a href="{% url 'product:category' link.pk %}"
+               class="nav-link {% if request.resolver_match.kwargs.pk|add:'0' == link.pk %}
+                  active
+                {% endif %}">
+                {{ link.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
