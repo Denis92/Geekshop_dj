@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from .models import ProductCategory, Product
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404,  HttpResponseRedirect
 from basketapp.models import Basket
+from mainapp.forms import ContactForm
+from django.http import HttpResponse
+from django.core.mail import send_mail, BadHeaderError
 
 # from basketapp.views import basket_viw
 
@@ -9,7 +12,7 @@ from basketapp.models import Basket
 links_menu = [
     {'href': 'main', 'name': 'Главная'},
     {'href': 'product:index', 'name': 'Каталог'},
-    {'href': 'contact', 'name': 'Контакты'},
+    {'href': 'contact:contact', 'name': 'Контакты'},
 ]
 
 
@@ -93,11 +96,38 @@ def product_page(request, pk=None):
     return render(request, 'mainapp/product_page.html', context=context)
 
 
-def contact(request):
+def contacts(request):
     basket = get_basket(request.user)
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        # Если форма заполнена корректно, сохраняем все введённые пользователем значения
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            sender = form.cleaned_data['sender']
+            message = form.cleaned_data['message']
+            copy = form.cleaned_data['copy']
+
+            recipients = ['Denis.Gorshkov76@gmail.com']
+            # Если пользователь захотел получить копию себе, добавляем его в список получателей
+            if copy:
+                recipients.append(sender)
+            try:
+                send_mail(subject, message, 'Denis.Gorshkov76@gmail.com', recipients)
+            except BadHeaderError:  # Защита от уязвимости
+                return HttpResponse('Invalid header found')
+            # Переходим на другую страницу, если сообщение отправлено
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        # Заполняем форму
+        form = ContactForm()
+    # Отправляем форму на страницу
     context = {
         'list_info': [1, 2, 3],
         'link': links_menu,
         'basket': basket,
+        'form': form,
     }
     return render(request, 'mainapp/contact.html', context=context)
+
+
+

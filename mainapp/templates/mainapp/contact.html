@@ -5,38 +5,38 @@
     <div class="container ">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                <form action="">
+                <form action="{% url 'mainapp:contact' %}" method="post">{% csrf_token %}
                     <div class="card border-success mb-3">
                         <div class="card-header text-center">
                             <h1>Напишите нам</h1>
                         </div>
-                        <div class="card-body">
-                            <div class="input-group mb-3">
+                        <div class="card-body text-center">
+                            <div class="input-group mb-3 ">
+                                {{ form.sender.errors }}
+                                {{ form.sender }}
                                 <div class="input-group-append">
-                                    <span class="input-group-text" id="basic-addon2">Ваше имя</span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="Email" class="form-control" value="{{ user.email }}">
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="basic-addon2">@example.com</span>
+                                    <label class="input-group-text" id="basic-addon2" for="id_sender">E-mail:</label>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-append">
-                                    <span class="input-group-text" id="basic-addon2">Тема сообщения</span>
+                                    <label class="input-group-text" id="basic-addon2" for="id_subject">Тема:</label>
                                 </div>
-                                <input type="text" class="form-control" placeholder="">
+                                {{ form.subject.errors }}
+                                {{ form.subject }}
                             </div>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Ваш текст</span>
+                                    <label class="input-group-text" for="id_message">Сообщение:</label>
                                 </div>
-                                <textarea class="form-control" aria-label="With textarea"></textarea>
+                                {{ form.message.errors }}
+                                {{ form.message }}
                             </div>
                             <br>
-                            <button type="button" class="btn btn-success">Отправить</button>
+                            {{ form.copy.errors }}
+                            <label for="id_copy">Отправить копию себе {{ form.copy }}</label>
+                            <br>
+                            <button type="submit" class="btn btn-success">Отправить</button>
                         </div>
                     </div>
                 </form>
