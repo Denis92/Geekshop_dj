@@ -4,15 +4,12 @@ from django.contrib import auth
 from django.urls import reverse
 from authapp.forms import ShopUserRegisterForm
 from authapp.forms import ShopUserEditForm
-from mainapp.views import links_menu
 
 
 def login(request):
     title = 'вход'
 
-    login_form = ShopUserLoginForm(data=request.POST or None)
-
-    next = request.GET['next'] if 'next' in request.GET.keys() else ''
+    login_form = ShopUserLoginForm(data=request.POST)
 
     if request.method == 'POST' and login_form.is_valid():
         username = request.POST['username']
@@ -21,20 +18,10 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user and user.is_active:
             auth.login(request, user)
-            if 'next' in request.POST.keys():
-                return HttpResponseRedirect(request.POST['next'])
+            return HttpResponseRedirect(reverse('main'))
 
-            else:
-                return HttpResponseRedirect(reverse('main'))
-
-    context = {
-        'title': title,
-        'login_form': login_form,
-        'next': next,
-        'link': links_menu,
-    }
-
-    return render(request, 'authapp/login.html', context=context)
+    context = {'title': title, 'login_form': login_form}
+    return render(request, 'authapp/login.html', context)
 
 
 def logout(request):
@@ -54,7 +41,7 @@ def register(request):
     else:
         register_form = ShopUserRegisterForm()
 
-    context = {'title': title, 'register_form': register_form, 'link': links_menu,}
+    context = {'title': title, 'register_form': register_form}
 
     return render(request, 'authapp/register.html', context)
 
@@ -70,7 +57,7 @@ def edit(request):
     else:
         edit_form = ShopUserEditForm(instance=request.user)
 
-    content = {'title': title, 'edit_form': edit_form, 'link': links_menu,}
+    content = {'title': title, 'edit_form': edit_form}
 
     return render(request, 'authapp/edit.html', content)
 

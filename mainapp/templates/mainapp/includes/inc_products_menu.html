@@ -2,72 +2,39 @@
 
 <div class="container">
     <div class="card-deck">
-        {% if hot_offer %}
-            {% for hot_prod in hot_offer %}
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-                <br>
-                <div class="card border-success mb-3 text-center" style="width: 15rem;">
-                    <div class="text-center">
-                        <div class="card-header text-danger ">
-                            Горячее предложение
-                            {{hot_prod.name}}
-                        </div>
-                        <img src="/media/{{ hot_prod.image }}" class="card-img-top rounded"
-                             style="width: 150px; height: 150px;" alt="...">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <a href="{% url 'mainapp:product_page' hot_prod.pk %}" class="btn btn-outline-success btn-sm" role="button"
-                                       aria-pressed="true">Подробнее
-                                    </a>
-                                </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <a class="btn btn-outline-success btn-sm"
-                                           href="{% url 'basket:add' hot_prod.pk %}">
-                                            В корзину
-                                        </a>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="card-footer text-muted">
-                            Цена: {{ hot_prod.price }}(руб.)
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-</div>
-<div class="container">
-    <div class="card-deck">
         {% for prod in products %}
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
                 <br>
                 <div class="card border-success mb-3 text-center" style="width: 15rem;">
                     <div class="text-center">
                         <div class="card-header">
-                            {{ prod.name }}<br>
+                            {{ prod.name }}
                         </div>
                         <img src="/media/{{ prod.image }}" class="card-img-top rounded"
                              style="width: 150px; height: 150px;" alt="...">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <a href="{% url 'mainapp:product_page' prod.pk %}" class="btn btn-outline-success btn-sm" role="button"
+                                    <a href="#" class="btn btn-outline-success btn-sm" role="button"
                                        aria-pressed="true">Подробнее
                                     </a>
                                 </div>
+                                {% if request.user.is_authenticated %}
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <a class="btn btn-outline-success btn-sm"
                                            href="{% url 'basket:add' prod.pk %}">
                                             В корзину
                                         </a>
                                     </div>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="card-footer text-muted">
-                            Цена: {{ prod.price }}(руб.)
+                            {% for item in basket %}
+                                {% if item.product == prod %}
+                                    Количество данного товара в корзине: {{ item.quantity }}
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
