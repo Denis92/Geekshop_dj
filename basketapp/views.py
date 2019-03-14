@@ -1,13 +1,25 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from basketapp.models import Basket
 from mainapp.models import Product
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+from django.template.loader import render_to_string
+from django.http import JsonResponse
+from mainapp.views import links_menu
 
 
+@login_required
 def basket(request):
-    context = {}
-    return render(request, 'basketapp.backet.html', context=context)
+    basket = Basket.objects.filter(user=request.user).order_by('product__category')
+
+    context = {
+        'basket': basket,
+        'link': links_menu,
+    }
+    return render(request, 'basketapp/basket.html', context=context)
 
 
+@login_required
 def basket_add(request, pk):
     product = get_object_or_404(Product, pk=pk)
     basket = Basket.objects.filter(user=request.user, product=product)
@@ -20,15 +32,42 @@ def basket_add(request, pk):
         new_basket = Basket(user=request.user, product=product)
         new_basket.quantity += 1
         new_basket.save()
-
+    if 'login' in request.META.get('HTTP_REFERER'):
+        return HttpResponseRedirect(reverse('product:product_page', args=[pk]))
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@login_required
 def basket_remove(request, pk):
-    context = {}
-    return render(request, 'basketapp/basket.html', context=context)
+    basket_record = get_object_or_404(Basket, pk=pk)
+    basket_record.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@login_required
+def basket_edit(request, pk, quantity):
+    if request.is_ajax():
+        quantity = int(quantity)
+        new_basket_item = Basket.objects.get(pk=int(pk))
+
+        if quantity > 0:
+            new_basket_item.quantity = quantity
+            new_basket_item.save()
+        else:
+            new_basket_item.delete()
+
+        basket_items = Basket.objects.filter(user=request.user).order_by('product__category')
+
+        context = {
+            'basket': basket_items,
+        }
+
+        result = render_to_string('basketapp/includes/inc_basket_list.html', context=context)
+
+        return JsonResponse({'result': result})
+
+
+@login_required
 def basket_viw(request):
     if request.user.is_authenticated:
         basket_res_all_price = 0
