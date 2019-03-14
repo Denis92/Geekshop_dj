@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'mainapp',
     'authapp',
     'basketapp',
-    'adminapp',
 ]
 
 MIDDLEWARE = [
@@ -127,10 +126,3 @@ STATICFILES_DIRS = (
 )
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-LOGIN_URL = '/auth/login/'
-# EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com' #Например, smtp.gmail.com
-EMAIL_HOST_USER = ' ' #Например, user@gmail.com. Именно его необходимо указывать как ВАШ_EMAIL_ДЛЯ_ОТПРАВКИ_СООБЩЕНИЯ в исходном коде предыдущего пункта
-EMAIL_HOST_PASSWORD = '*****'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
