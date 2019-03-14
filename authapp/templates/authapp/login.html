@@ -17,9 +17,6 @@
         <div class="card-body">
             <form action="{% url 'auth:login' %}" method="post">
                 {% csrf_token %}
-                {% if next %}
-                    <input type="hidden" name="next" value="{{ next }}">
-                {% endif %}
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon2">Логин</span>

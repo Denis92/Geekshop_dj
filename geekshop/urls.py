@@ -23,11 +23,10 @@ from django.conf.urls import include
 urlpatterns = [
     path('', mainapp.main, name='main'),
     path('product/', include('mainapp.urls', namespace='product')),
-    path('contact/', include('mainapp.urls', namespace='contact')),
+    path('contact/', mainapp.contact, name='contact'),
     path('basket/', include('basketapp.urls', namespace='basket')),
     path('admin/', admin.site.urls),
-    path('auth/', include('authapp.urls', namespace='auth')),
-    path('admin_custom/', include('adminapp.urls', namespace='admin_custom')),
+    path('auth/', include('authapp.urls', namespace='auth'))
 ]
 
 if settings.DEBUG:
