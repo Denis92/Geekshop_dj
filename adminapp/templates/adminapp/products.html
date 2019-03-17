@@ -4,15 +4,15 @@
 {% block content %}
   <div class="products_list">
     <button class="new_product">
-      <a href={% url 'admin_custom:product_create' category.pk %}>
+      <a href={% url 'admin_custom:product_create' %}>
         новый продукт
       </a>
     </button>
 
-    {% for object in objects %}
+    {% for object in object_list %}
       <div class="product_record">
         <img
-          src="/media/{{object.image|default:'products_images/default.jpg'}}"
+          src="/media/{{object.image}}"
           alt="{{ object.name }}">
         <div class="product_name">
           {{ object.name|title }}

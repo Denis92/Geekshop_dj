@@ -5,6 +5,7 @@ from basketapp.models import Basket
 from mainapp.forms import ContactForm
 from django.http import HttpResponse
 from django.core.mail import send_mail, BadHeaderError
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # from basketapp.views import basket_viw
 
@@ -42,7 +43,7 @@ def main(request):
     return render(request, 'mainapp/index.html', context=context)
 
 
-def product(request, pk=None):
+def product(request, pk=None, page=1):
     print(pk)
 
     title = 'продукты'
@@ -53,15 +54,23 @@ def product(request, pk=None):
     if pk is not None:
         if pk == 0:
             products = Product.objects.all().order_by('price')
-            category = {'name': 'все'}
+            category = {'pk': 0, 'name': 'все'}
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
             products = Product.objects.filter(category__pk=pk).order_by('price')
+        paginator = Paginator(products, 2)
+        try:
+            products_paginator = paginator.page(page)
+        except PageNotAnInteger:
+            products_paginator = paginator.page(1)
+        except EmptyPage:
+            products_paginator = paginator.page(paginator.num_pages)
+
         context = {
             'title': title,
             'links_menu_prod': links_menu_prod,
             'category': category,
-            'products': products,
+            'products': products_paginator,
             'link': links_menu,
             'basket': basket,
             'hot_offer': get_hot_offer(),

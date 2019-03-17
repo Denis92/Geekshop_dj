@@ -9,14 +9,11 @@
       </a>
     </button>
 
-    {% for object in objects %}
+    {% for object in object_list %}
     <div class="category_record
         {% if not object.is_active %}
             not_active
         {% endif %}">
-    <div class="category_name">
-    {{ object.name|title }}
-    </div>
         <div class="category_name">
           {{ object.name|title }}
         </div>
@@ -32,7 +29,7 @@
             </a>
           </button>
           <button>
-            <a href={% url 'admin:category_delete' object.pk %}>
+            <a href={% url 'admin_custom:category_delete' object.pk %}>
               удалить
             </a>
           </button>
