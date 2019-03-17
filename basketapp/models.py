@@ -11,7 +11,6 @@ class Basket(models.Model):
 
     def __str__(self):
         return f'{self.user} | {self.product} | количество : {self.quantity}'
-
     @property
     def product_cost(self):
         return self.product.price * self.quantity
@@ -27,3 +26,14 @@ class Basket(models.Model):
         items = Basket.objects.filter(user=self.user)
         total_coast = sum(list(map(lambda x: x.product_cost, items)))
         return total_coast
+
+class OrderUser(models.Model):
+    # user_order = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='order_user')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(verbose_name='количество', default=0)
+    add_datatime = models.DateTimeField(verbose_name='время', auto_now_add=True)
+
+    # def __str__(self):
+        # return f'{self.user} | {self.product} | количество : {self.quantity}'
+
+
