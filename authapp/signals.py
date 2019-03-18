@@ -10,4 +10,4 @@ from .models import ShopUser
 def set_book_read(instance: ShopUser, created=False, **kwargs):
     if created:
         print(ShopUser.objects.last().email)
-        send_mail('Регистрация', 'Поздравляем Вы успешно прошли регистрацию', f'Admin', [ShopUser.objects.last().email])
+        send_mail('Регистрация', 'Поздравляем Вы успешно прошли регистрацию', f'Admin', [instance.email])

@@ -54,7 +54,7 @@ def register(request):
     else:
         register_form = ShopUserRegisterForm()
 
-    context = {'title': title, 'register_form': register_form, 'link': links_menu,}
+    context = {'title': title, 'register_form': register_form, 'link': links_menu, }
 
     return render(request, 'authapp/register.html', context)
 
@@ -70,8 +70,6 @@ def edit(request):
     else:
         edit_form = ShopUserEditForm(instance=request.user)
 
-    content = {'title': title, 'edit_form': edit_form, 'link': links_menu,}
+    content = {'title': title, 'edit_form': edit_form, 'link': links_menu, }
 
     return render(request, 'authapp/edit.html', content)
-
-
