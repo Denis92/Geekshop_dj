@@ -116,12 +116,12 @@ def contacts(request):
             message = form.cleaned_data['message']
             copy = form.cleaned_data['copy']
 
-            recipients = ['Denis.Gorshkov76@admin.ru']
+            recipients = ['Denis.Gorshkov76@gmail.com']
             # Если пользователь захотел получить копию себе, добавляем его в список получателей
             if copy:
                 recipients.append(sender)
             try:
-                send_mail(subject, message, f'Admin', [sender])
+                send_mail(subject, message, 'Denis.Gorshkov76@gmail.com', recipients)
             except BadHeaderError:  # Защита от уязвимости
                 return HttpResponse('Invalid header found')
             # Переходим на другую страницу, если сообщение отправлено

@@ -11,6 +11,7 @@ class Basket(models.Model):
 
     def __str__(self):
         return f'{self.user} | {self.product} | количество : {self.quantity}'
+
     @property
     def product_cost(self):
         return self.product.price * self.quantity

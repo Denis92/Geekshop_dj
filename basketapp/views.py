@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
-from basketapp.models import Basket, OrderUser
+from basketapp.models import Basket
 from mainapp.models import Product
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -68,35 +68,6 @@ def basket_edit(request, pk, quantity):
 
 
 @login_required
-def get_order_user(request):
-    # product = get_object_or_404(Product)
-    basket = Basket.objects.filter(user=request.user)
-    print(basket)
-    for item in basket:
-        print(item.product)
-        order_record = OrderUser.objects.filter(product=item.product)
-        print(order_record)
-        # if order_record:
-        #     order_record[0].quantity = item.quantity
-        #     order_record[0].save()
-        # else:
-        new_order = OrderUser(product=item.product)
-        new_order.quantity = item.quantity
-        new_order.save()
-    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    return HttpResponseRedirect(reverse('basket:remove_order'))
-
-@login_required
-def remove_order(request):
-    basket = Basket.objects.filter(user=request.user)
-    print(basket)
-    for item in basket:
-        print(item.product)
-        order_record = OrderUser.objects.filter(product=item.product)
-        order_record.delete()
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-@login_required
 def basket_viw(request):
     if request.user.is_authenticated:
         basket_res_all_price = 0
@@ -109,5 +80,3 @@ def basket_viw(request):
         return [basket_res_all_price, basket_res_all_quantity]
     else:
         return [None, None]
-
-

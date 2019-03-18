@@ -11,13 +11,11 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-from configparser import ConfigParser
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-local_congig_path = os.path.join(BASE_DIR, 'conf', 'local.conf')
-config = ConfigParser()
-config.read(local_congig_path)
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -40,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainapp',
-    'authapp.apps.AuthappConfig',
-    'basketapp.apps.BasketappConfig',
+    'authapp',
+    'basketapp',
     'adminapp',
 ]
 
@@ -109,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -131,10 +129,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_URL = '/auth/login/'
 # EMAIL_USE_TLS = True
-
-EMAIL_HOST = config.get('smtp', 'HOST')
-EMAIL_HOST_USER = config.get('smtp', 'SENDER_EMAIL')
-EMAIL_HOST_PASSWORD = config.get('smtp', 'PASSWORD')
-EMAIL_PORT = config.get('smtp', 'PORT')
-EMAIL_USE_TLS = config.getboolean('smtp', 'TSL_USE')
-EMAIL_USE_SLL = False
+EMAIL_HOST = 'smtp.gmail.com' #Например, smtp.gmail.com
+EMAIL_HOST_USER = 'Denis@gmail.com' #Например, user@gmail.com. Именно его необходимо указывать как ВАШ_EMAIL_ДЛЯ_ОТПРАВКИ_СООБЩЕНИЯ в исходном коде предыдущего пункта
+EMAIL_HOST_PASSWORD = '*****'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
